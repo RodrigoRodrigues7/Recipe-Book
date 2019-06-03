@@ -1,11 +1,13 @@
 <div class="row">
 	<div class="col-xs-10">
-		<app-shopping-list-edit (addIngredient)="onIgredientAdded($event)"></app-shopping-list-edit>
+		
+		<app-shopping-list-edit></app-shopping-list-edit>
 		<hr>
 		<ul class="list-group">
 			<a class="list-group-item" style="cursor: pointer" *ngFor="let item of ingredients">
 				{{item.name}}  <span class="label label-warning">{{ item.amount }}</span>
 			</a>
 		</ul>
+
 	</div>
 </div>
