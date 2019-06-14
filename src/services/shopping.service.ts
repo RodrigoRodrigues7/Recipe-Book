@@ -20,6 +20,11 @@ export class ShoppingListService {
       return this.ingredients[index];
    }
 
+   updateIngredient(index: number, newIngredient: Ingredient) {
+      this.ingredients[index] = newIngredient;
+      this.ingredientsChanged.next(this.ingredients.slice());
+   }
+
    addNewIngredient(ingredient: Ingredient) {
       this.ingredients.push(ingredient);
       this.ingredientsChanged.next(this.ingredients.slice());
@@ -30,6 +35,11 @@ export class ShoppingListService {
       //    this.addNewIngredient(ingredient);         
       // }
       this.ingredients.push(...ingredients);
+      this.ingredientsChanged.next(this.ingredients.slice());
+   }
+
+   removeIngredient(index: number) {
+      this.ingredients.splice(index, 1);
       this.ingredientsChanged.next(this.ingredients.slice());
    }
 
