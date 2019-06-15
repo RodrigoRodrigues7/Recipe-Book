@@ -43,4 +43,9 @@ export class ShoppingListService {
       this.ingredientsChanged.next(this.ingredients.slice());
    }
 
+   clearShoppingList() {
+      this.ingredients.splice(0);
+      this.ingredientsChanged.next(this.ingredients.slice());
+   }
+
 }

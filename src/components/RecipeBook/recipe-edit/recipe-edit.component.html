@@ -28,7 +28,7 @@
 					<div class="form-group">
 						<label for="imagePath">Image URL</label>
 						<input class="form-control" type="text" id="imagePath" formControlName="imagePath"
-							placeholder="Recipe image ...">
+							placeholder="Recipe image ..." #imagePath>
 					</div>
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 			<!--Image Pre-view -->
 			<div class="row">
 				<div class="col-xs-12">
-					<img src="" class="img-responsive">
+					<img [src]="imagePath.value" class="img-responsive">
 				</div>
 			</div>
 
@@ -65,7 +65,7 @@
 						</div>
 
 						<div class="col-xs-2">
-							<button class="btn btn-danger" type="button">X</button>
+							<button class="btn btn-danger" type="button" (click)="onRemoveIngredient(i)">X</button>
 						</div>
 
 					</div>
