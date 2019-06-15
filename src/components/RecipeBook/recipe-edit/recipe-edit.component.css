@@ -1,3 +1,13 @@
 button {
    margin-right: 5px;
 }
+
+input.ng-invalid.ng-touched, 
+textarea.ng-invalid.ng-touched {
+   border: 1px solid rgb(221, 16, 16);
+}
+
+input.ng-valid.ng-touched, 
+textarea.ng-valid.ng-touched {
+   border: 1px solid rgb(26, 230, 36);
+}

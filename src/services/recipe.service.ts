@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Recipe } from 'src/components/recipeBook/recipes/recipe.model';
 import { Ingredient } from 'src/app/shared/ingredient.model';
@@ -7,11 +8,13 @@ import { ShoppingListService } from './shopping.service';
 @Injectable()
 export class RecipeService {
 
+	recipesChanged = new Subject<Recipe[]>();
+
 	private recipesList: Recipe[] = [
 		new Recipe(
-			'Hamburger with Fries', 
-			'Big Fat Hamburger with French Fries', 
+			'Hamburger with Fries',
 			'https://d9hyo6bif16lx.cloudfront.net/live/img/production/detail/menu/lunch-dinner_burgers_all-american-burger.jpg',
+			'Big Fat Hamburger with French Fries',
 			[
 				new Ingredient('Buns', 2),
 				new Ingredient('Meat', 1),
@@ -20,14 +23,14 @@ export class RecipeService {
 				new Ingredient('Freach Fries', 20)
 			]),
 		new Recipe(
-			'Another Hamburger', 
-			'This is funny', 
+			'Another Hamburger',
 			'https://d9hyo6bif16lx.cloudfront.net/live/img/production/detail/menu/lunch-dinner_burgers_all-american-burger.jpg',
+			'This is funny',
 			[]),
 		new Recipe(
-			'Yet another Hamburger', 
-			"As you can see I'm bored ...", 
+			'Yet another Hamburger',
 			'https://d9hyo6bif16lx.cloudfront.net/live/img/production/detail/menu/lunch-dinner_burgers_all-american-burger.jpg',
+			"As you can see I'm bored ...", 
 			[]),
 	];
 
@@ -43,6 +46,21 @@ export class RecipeService {
 
 	sentIngredientsToShoppingList(ingredients: Ingredient[]) {
 		this.shopService.addIngredientsFromRecipe(ingredients);
+	}
+
+	addRecipe(recipe: Recipe) {
+		this.recipesList.push(recipe);
+		this.recipesChanged.next(this.recipesList.slice());
+	}
+
+	updateRecipe(index: number, newRecipe: Recipe) {
+		this.recipesList[index] = newRecipe;
+		this.recipesChanged.next(this.recipesList.slice());
+	}
+
+	deleteRecipe(index: number) {
+		this.recipesList.splice(index, 1);
+		this.recipesChanged.next(this.recipesList.slice());
 	}
 
 }

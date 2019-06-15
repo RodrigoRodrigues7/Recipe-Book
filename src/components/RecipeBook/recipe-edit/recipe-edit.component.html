@@ -1,76 +1,86 @@
 <div class="row">
-   <div class="col-xs-12">
+	<div class="col-xs-12">
 
-      <form>
+		<form [formGroup]="recipeForm" (ngSubmit)="onSubmitForm()">
 
-         <!-- Buttons 'Save' and 'Cancel' -->
-         <div class="row">
-            <div class="col-xs-12">
-               <button class="btn btn-success" type="submit">Save</button>
-               <button class="btn btn-danger" type="button">Cancel</button>
-            </div>
-         </div>
+			<!-- Buttons 'Save' and 'Cancel' -->
+			<div class="row">
+				<div class="col-xs-12">
+					<button class="btn btn-success" type="submit" [disabled]="!recipeForm.valid">Save</button>
+					<button class="btn btn-danger" type="button" (click)="onCancelForm()">Cancel</button>
+				</div>
+			</div>
 
-         <!--Input 'Name' -->
-         <div class="row">
-            <div class="col-xs-12">
-               <div class="form-group">
-                  <label for="name">Name</label>
-                  <input class="form-control" type="text" id="name" placeholder="Recipe name ...">
-               </div>
-            </div>
-         </div>
+			<!--Input 'Name' -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input class="form-control" type="text" id="name" formControlName="name"
+							placeholder="Recipe name ...">
+					</div>
+				</div>
+			</div>
 
-         <!--Input 'Image URL' -->
-         <div class="row">
-            <div class="col-xs-12">
-               <div class="form-group">
-                  <label for="imagePath">Image URL</label>
-                  <input class="form-control" type="text" id="imagePath" placeholder="Recipe image ...">
-               </div>
-            </div>
-         </div>
+			<!--Input 'Image URL' -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="imagePath">Image URL</label>
+						<input class="form-control" type="text" id="imagePath" formControlName="imagePath"
+							placeholder="Recipe image ...">
+					</div>
+				</div>
+			</div>
 
-         <!--Image Pre-view -->
-         <div class="row">
-            <div class="col-xs-12">
-               <img src="" class="img-responsive">
-            </div>
-         </div>
+			<!--Image Pre-view -->
+			<div class="row">
+				<div class="col-xs-12">
+					<img src="" class="img-responsive">
+				</div>
+			</div>
 
-         <!--Input 'Description' -->
-         <div class="row">
-            <div class="col-xs-12">
-               <div class="form-group">
-                  <label for="description">Description</label>
-                  <textarea class="form-control" type="text" id="description" rows="6"
-                     placeholder="Enter description here ..."></textarea>
-               </div>
-            </div>
-         </div>
+			<!--Input 'Description' -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="description">Description</label>
+						<textarea class="form-control" type="text" id="description" rows="6"
+							formControlName="description" placeholder="Enter description here ..."></textarea>
+					</div>
+				</div>
+			</div>
 
-         <!--Inputs for the 'Ingredients' -->
-         <div class="row">
-            <div class="col-xs-12">
+			<!--Inputs for the 'Ingredients' -->
+			<div class="row">
+				<div class="col-xs-12" formArrayName="ingredients">
+					<div class="row" *ngFor="let control of getControls(); let i=index" [formGroupName]="i" style="margin-top: 5px;">
 
-               <div class="row">
-                  <div class="col-xs-8">
-                     <input class="form-control" type="text" placeholder="Ingredient name ...">
-                  </div>
+						<div class="col-xs-8">
+							<input class="form-control" type="text" formControlName="name" placeholder="Ingredient name ...">
+						</div>
 
-                  <div class="col-xs-2">
-                     <input class="form-control" type="number" placeholder="amount ...">
-                  </div>
+						<div class="col-xs-2">
+							<input class="form-control" type="number" formControlName="amount" placeholder="amount ...">
+						</div>
 
-                  <div class="col-xs-2">
-                     <button class="btn btn-danger">X</button>
-                  </div>
-               </div>
+						<div class="col-xs-2">
+							<button class="btn btn-danger" type="button">X</button>
+						</div>
 
-            </div>
-         </div>
+					</div>
+				</div>
+			</div>
 
-      </form>
+			<hr>
+				
+			<div class="row">
+				<div class="col-xs-12">
+					<button class="btn btn-success" type="button" (click)="onAddIngredient()">Add Ingredient</button>
+				</div>
+			</div>
 
-   </div>
+		</form>
+
+	</div>
 </div>
