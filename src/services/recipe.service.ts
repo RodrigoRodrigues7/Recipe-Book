@@ -10,7 +10,7 @@ export class RecipeService {
 
 	recipesChanged = new Subject<Recipe[]>();
 
-	private recipesList: Recipe[] = [
+	/*private recipesList: Recipe[] = [
 		new Recipe(
 			'Hamburger with Fries',
 			'https://d9hyo6bif16lx.cloudfront.net/live/img/production/detail/menu/lunch-dinner_burgers_all-american-burger.jpg',
@@ -46,7 +46,9 @@ export class RecipeService {
 				new Ingredient('Panko Bread Crumbs', 2),
 				new Ingredient('Paprika', 1),
 			]),
-	];
+	];*/
+
+	private recipesList: Recipe[] = []
 
 	constructor(private shopService: ShoppingListService) { }
 

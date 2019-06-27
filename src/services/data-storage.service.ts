@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
 
 import { Recipe } from 'src/components/recipeBook/recipes/recipe.model';
 import { RecipeService } from './recipe.service';
@@ -21,9 +22,15 @@ export class DataStorageService {
 	}
 
 	fetchRecipes() {
-		this.http.get<Recipe[]>(API_CONFIG.firebaseUrl).subscribe(
-			recipes => { this.recipeService.setRecipes(recipes); }
-		);
+		return this.http.get<Recipe[]>(API_CONFIG.firebaseUrl)
+			.pipe(map(
+				recipes => {
+					return recipes.map(recipe => {
+						// If any fetched recipe doesn't have ingredients than it will have a empty array of 'Ingredient'  
+						return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients : [] }
+					});
+				}), tap(recipes => { this.recipeService.setRecipes(recipes); })
+			)
 	}
 
 }
