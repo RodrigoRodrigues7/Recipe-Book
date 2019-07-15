@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from '../components/header/header.component';
@@ -21,34 +21,40 @@ import { ShoppingListService } from 'src/services/shopping.service';
 import { RecipeStartComponent } from '../components/RecipeBook/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from '../components/RecipeBook/recipe-edit/recipe-edit.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from 'src/components/auth/auth-interceptor.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    ShoppingListComponent,
-    ShoppingListEditComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
-    RecipeListComponent,
-    RecipesComponent,
-    DropdownDirective,
-    RecipeStartComponent,
-    RecipeEditComponent,
-    AuthComponent,
-    LoadingSpinnerComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule
-  ],
-  providers: [
-    RecipeService,
-    ShoppingListService
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		HeaderComponent,
+		ShoppingListComponent,
+		ShoppingListEditComponent,
+		RecipeDetailComponent,
+		RecipeItemComponent,
+		RecipeListComponent,
+		RecipesComponent,
+		DropdownDirective,
+		RecipeStartComponent,
+		RecipeEditComponent,
+		AuthComponent,
+		LoadingSpinnerComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule,
+		AppRoutingModule
+	],
+	providers: [
+		RecipeService,
+		ShoppingListService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptorService,
+			multi: true
+		}
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
