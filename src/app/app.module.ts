@@ -11,16 +11,18 @@ import { RecipeDetailComponent } from '../components/recipeBook/recipe-detail/re
 import { RecipeItemComponent } from '../components/recipeBook/recipe-item/recipe-item.component';
 import { RecipeListComponent } from '../components/recipeBook/recipe-list/recipe-list.component';
 import { RecipesComponent } from '../components/RecipeBook/recipes/recipes.component';
+import { RecipeStartComponent } from '../components/RecipeBook/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from '../components/RecipeBook/recipe-edit/recipe-edit.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AlertComponent } from './shared/alert/alert.component';
 import { AuthComponent } from '../components/auth/auth.component';
 
+import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
 
 import { RecipeService } from 'src/services/recipe.service';
 import { ShoppingListService } from 'src/services/shopping.service';
-import { RecipeStartComponent } from '../components/RecipeBook/recipe-start/recipe-start.component';
-import { RecipeEditComponent } from '../components/RecipeBook/recipe-edit/recipe-edit.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from 'src/components/auth/auth-interceptor.service';
 
 @NgModule({
@@ -37,7 +39,9 @@ import { AuthInterceptorService } from 'src/components/auth/auth-interceptor.ser
 		RecipeStartComponent,
 		RecipeEditComponent,
 		AuthComponent,
-		LoadingSpinnerComponent
+		LoadingSpinnerComponent,
+		AlertComponent,
+		PlaceholderDirective
 	],
 	imports: [
 		BrowserModule,
@@ -55,6 +59,7 @@ import { AuthInterceptorService } from 'src/components/auth/auth-interceptor.ser
 			multi: true
 		}
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	entryComponents: [AlertComponent]
 })
 export class AppModule { }
